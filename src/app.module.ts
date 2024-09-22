@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BusinessesModule } from './businesses/businesses.module';
+import { AppointmentsModule } from './appointments/appointments.module';
 import { BusinessPlanOverridesModule } from './business_plan_overrides/business_plan_overrides.module';
 import { SubscriptionsModule } from './subscriptions/subscriptions.module';
 import { PlansModule } from './plans/plans.module';
@@ -9,13 +10,10 @@ import { BusinessHolidaysModule } from './business_holidays/business_holidays.mo
 import { BusinessHoursModule } from './business_hours/business_hours.module';
 import { AppointmentsServicesModule } from './appointments_services/appointments_services.module';
 import { ServiceAreasModule } from './service_areas/service_areas.module';
-import { AppointmentsModule } from './appointments/appointments.module';
 import { ServicesModule } from './services/services.module';
 import { ClientsModule } from './clients/clients.module';
 import { WorkersModule } from './workers/workers.module';
 import { UsersModule } from './users/users.module';
-import { UsersModule } from './users/users.module';
-import { BusinessesModule } from './businesses/businesses.module';
 
 @Module({
   imports: [
@@ -42,7 +40,7 @@ import { BusinessesModule } from './businesses/businesses.module';
     BusinessBreaksModule,
     PlansModule,
     SubscriptionsModule,
-    BusinessPlanOverridesModule,
+    BusinessPlanOverridesModule
   ],
 })
 export class AppModule {}

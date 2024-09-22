@@ -13,7 +13,7 @@ export class WorkersService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} worker`;
+    return {hola: "hola"};
   }
 
   update(id: number, updateWorkerDto: UpdateWorkerDto) {

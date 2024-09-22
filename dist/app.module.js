@@ -9,6 +9,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
+const businesses_module_1 = require("./businesses/businesses.module");
+const appointments_module_1 = require("./appointments/appointments.module");
+const business_plan_overrides_module_1 = require("./business_plan_overrides/business_plan_overrides.module");
+const subscriptions_module_1 = require("./subscriptions/subscriptions.module");
+const plans_module_1 = require("./plans/plans.module");
+const business_breaks_module_1 = require("./business_breaks/business_breaks.module");
+const business_holidays_module_1 = require("./business_holidays/business_holidays.module");
+const business_hours_module_1 = require("./business_hours/business_hours.module");
+const appointments_services_module_1 = require("./appointments_services/appointments_services.module");
+const service_areas_module_1 = require("./service_areas/service_areas.module");
+const services_module_1 = require("./services/services.module");
+const clients_module_1 = require("./clients/clients.module");
+const workers_module_1 = require("./workers/workers.module");
+const users_module_1 = require("./users/users.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -25,6 +39,20 @@ exports.AppModule = AppModule = __decorate([
                 entities: [__dirname + '/**/*.entity{.ts,.js}'],
                 synchronize: true,
             }),
+            businesses_module_1.BusinessesModule,
+            users_module_1.UsersModule,
+            workers_module_1.WorkersModule,
+            clients_module_1.ClientsModule,
+            services_module_1.ServicesModule,
+            appointments_module_1.AppointmentsModule,
+            service_areas_module_1.ServiceAreasModule,
+            appointments_services_module_1.AppointmentsServicesModule,
+            business_hours_module_1.BusinessHoursModule,
+            business_holidays_module_1.BusinessHolidaysModule,
+            business_breaks_module_1.BusinessBreaksModule,
+            plans_module_1.PlansModule,
+            subscriptions_module_1.SubscriptionsModule,
+            business_plan_overrides_module_1.BusinessPlanOverridesModule
         ],
     })
 ], AppModule);
