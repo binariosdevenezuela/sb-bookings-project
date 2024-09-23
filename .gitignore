@@ -2,14 +2,6 @@
 node_modules/
 .env
 
-# Python
-__pycache__/
-*.pyc
-
 # Logs
 logs/
 *.log
-
-# IDE settings
-.vscode/
-.idea/

@@ -5,26 +5,23 @@ export class Plan {
   @PrimaryGeneratedColumn()
   plan_id: number;
 
-  @Column({ length: 255 })
+  @Column({ length: 20 })
   plan_name: string;
 
   @Column({ type: 'decimal', precision: 10, scale: 2 })
   price: number;
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ type: 'text' })
   description: string;
 
-  @Column({ type: 'int', nullable: true })
+  @Column({ type: 'int' })
   max_users: number;
 
   @Column({ type: 'boolean', default: false })
-  has_marketing: boolean;
+  marketing_feature: boolean;
 
   @Column({ type: 'boolean', default: false })
-  custom_domain: boolean;
-
-  @Column({ type: 'int', nullable: true })
-  storage_space: number;
+  custom_domain_feature: boolean;
 
   @Column({ type: 'int', nullable: true })
   max_appointments: number;

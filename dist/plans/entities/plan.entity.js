@@ -19,7 +19,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Plan.prototype, "plan_id", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ length: 255 }),
+    (0, typeorm_1.Column)({ length: 20 }),
     __metadata("design:type", String)
 ], Plan.prototype, "plan_name", void 0);
 __decorate([
@@ -27,25 +27,21 @@ __decorate([
     __metadata("design:type", Number)
 ], Plan.prototype, "price", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'text', nullable: true }),
+    (0, typeorm_1.Column)({ type: 'text' }),
     __metadata("design:type", String)
 ], Plan.prototype, "description", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'int', nullable: true }),
+    (0, typeorm_1.Column)({ type: 'int' }),
     __metadata("design:type", Number)
 ], Plan.prototype, "max_users", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'boolean', default: false }),
     __metadata("design:type", Boolean)
-], Plan.prototype, "has_marketing", void 0);
+], Plan.prototype, "marketing_feature", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'boolean', default: false }),
     __metadata("design:type", Boolean)
-], Plan.prototype, "custom_domain", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ type: 'int', nullable: true }),
-    __metadata("design:type", Number)
-], Plan.prototype, "storage_space", void 0);
+], Plan.prototype, "custom_domain_feature", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'int', nullable: true }),
     __metadata("design:type", Number)

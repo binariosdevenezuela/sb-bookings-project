@@ -28,21 +28,33 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "username", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ length: 255 }),
+    (0, typeorm_1.Column)({ length: 50 }),
     __metadata("design:type", String)
-], User.prototype, "password", void 0);
+], User.prototype, "name", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'enum', enum: ['owner', 'manager', 'worker'], default: 'owner' }),
+    (0, typeorm_1.Column)({ length: 50 }),
     __metadata("design:type", String)
-], User.prototype, "role", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ type: 'enum', enum: ['admin'], nullable: true }),
-    __metadata("design:type", String)
-], User.prototype, "platform_role", void 0);
+], User.prototype, "lastname", void 0);
 __decorate([
     (0, typeorm_1.Column)({ length: 255, nullable: true }),
     __metadata("design:type", String)
 ], User.prototype, "email", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ length: 15, nullable: true }),
+    __metadata("design:type", String)
+], User.prototype, "phone", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ length: 255 }),
+    __metadata("design:type", String)
+], User.prototype, "password", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'enum', enum: ['owner', 'worker'], default: 'owner' }),
+    __metadata("design:type", String)
+], User.prototype, "role", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'enum', enum: ['admin', 'manager'], nullable: true }),
+    __metadata("design:type", String)
+], User.prototype, "platform_role", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' }),
     __metadata("design:type", Date)

@@ -4,9 +4,8 @@ export declare class Plan {
     price: number;
     description: string;
     max_users: number;
-    has_marketing: boolean;
-    custom_domain: boolean;
-    storage_space: number;
+    marketing_feature: boolean;
+    custom_domain_feature: boolean;
     max_appointments: number;
     created_at: Date;
 }
