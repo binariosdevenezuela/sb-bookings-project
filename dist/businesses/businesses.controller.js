@@ -21,8 +21,8 @@ let BusinessesController = class BusinessesController {
     constructor(businessesService) {
         this.businessesService = businessesService;
     }
-    create(createBusinessDto) {
-        return this.businessesService.create(createBusinessDto);
+    async create(createBusinessDto) {
+        return await this.businessesService.create(createBusinessDto);
     }
     findAll() {
         return this.businessesService.findAll();
@@ -39,11 +39,11 @@ let BusinessesController = class BusinessesController {
 };
 exports.BusinessesController = BusinessesController;
 __decorate([
-    (0, common_1.Post)(),
+    (0, common_1.Post)('create'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_business_dto_1.CreateBusinessDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], BusinessesController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),

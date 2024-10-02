@@ -1,4 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { SchedulingModelEnum } from '../../common/enums'
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, DeleteDateColumn } from 'typeorm';
+import { BusinessLocation } from '../../business_locations/entities/business_location.entity';
 
 @Entity()
 export class Business {
@@ -8,27 +10,18 @@ export class Business {
   @Column({ length: 255 })
   name: string;
 
-  @Column({ length: 255, nullable: true })
-  address: string;
+  @OneToMany(() => BusinessLocation, location => location.business)
+  locations: BusinessLocation[];
 
   @Column({ length: 255, nullable: true })
   domain: string;
 
-  @Column({ type: 'boolean', default: false })
-  is_mobile: boolean;
-
-  @Column({ type: 'decimal', precision: 10, scale: 8, nullable: true })
-  latitude: number;
-
-  @Column({ type: 'decimal', precision: 11, scale: 8, nullable: true })
-  longitude: number;
-
-  @Column({ type: 'decimal', precision: 5, scale: 2, nullable: true })
-  service_radius: number;
-
-  @Column({ type: 'enum', enum: ['Predefined Blocks', 'Service Duration'], default: 'Service Duration' })
-  scheduling_model: 'Predefined Blocks' | 'Service Duration';
+  @Column({ type: 'enum', enum: SchedulingModelEnum, default: SchedulingModelEnum.ServiceDuration })
+  scheduling_model: SchedulingModelEnum;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;
+
+  @DeleteDateColumn({ nullable: true }) // Permite manejar soft deletes
+  deletedAt?: Date;
 }

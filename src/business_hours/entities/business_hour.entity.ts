@@ -1,3 +1,4 @@
+import { DayOfWeekEnum } from '../../common/enums'
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { Business } from '../../businesses/entities/business.entity';
 
@@ -9,8 +10,8 @@ export class BusinessHour {
   @ManyToOne(() => Business, (business) => business.business_id)
   business: Business;
 
-  @Column({ type: 'enum', enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] })
-  day_of_week: 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday' | 'Sunday';
+  @Column({ type: 'enum', enum: DayOfWeekEnum })
+  day_of_week: DayOfWeekEnum;
 
   @Column({ type: 'time' })
   start_time: string;

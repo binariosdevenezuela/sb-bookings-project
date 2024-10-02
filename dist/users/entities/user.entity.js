@@ -11,7 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const typeorm_1 = require("typeorm");
-const business_entity_1 = require("../../businesses/entities/business.entity");
+const enums_1 = require("../../common/enums");
+const business_location_entity_1 = require("../../business_locations/entities/business_location.entity");
 let User = class User {
 };
 exports.User = User;
@@ -20,13 +21,9 @@ __decorate([
     __metadata("design:type", Number)
 ], User.prototype, "user_id", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => business_entity_1.Business, (business) => business.business_id, { nullable: true }),
-    __metadata("design:type", business_entity_1.Business)
-], User.prototype, "business", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ length: 50, unique: true }),
-    __metadata("design:type", String)
-], User.prototype, "username", void 0);
+    (0, typeorm_1.ManyToOne)(() => business_location_entity_1.BusinessLocation, (businessLocation) => businessLocation.id, { nullable: true }),
+    __metadata("design:type", business_location_entity_1.BusinessLocation)
+], User.prototype, "businessLocation", void 0);
 __decorate([
     (0, typeorm_1.Column)({ length: 50 }),
     __metadata("design:type", String)
@@ -48,17 +45,17 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'enum', enum: ['owner', 'worker'], default: 'owner' }),
+    (0, typeorm_1.Column)({ type: 'enum', enum: enums_1.UserRoleEnum, default: enums_1.UserRoleEnum.Worker }),
     __metadata("design:type", String)
 ], User.prototype, "role", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ type: 'enum', enum: ['admin', 'manager'], nullable: true }),
-    __metadata("design:type", String)
-], User.prototype, "platform_role", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' }),
     __metadata("design:type", Date)
 ], User.prototype, "created_at", void 0);
+__decorate([
+    (0, typeorm_1.DeleteDateColumn)({ nullable: true }),
+    __metadata("design:type", Date)
+], User.prototype, "deletedAt", void 0);
 exports.User = User = __decorate([
     (0, typeorm_1.Entity)('users')
 ], User);

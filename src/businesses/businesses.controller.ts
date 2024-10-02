@@ -7,9 +7,9 @@ import { UpdateBusinessDto } from './dto/update-business.dto';
 export class BusinessesController {
   constructor(private readonly businessesService: BusinessesService) {}
 
-  @Post()
-  create(@Body() createBusinessDto: CreateBusinessDto) {
-    return this.businessesService.create(createBusinessDto);
+  @Post('create')
+  async create(@Body() createBusinessDto: CreateBusinessDto) {
+    return await this.businessesService.create(createBusinessDto);
   }
 
   @Get()

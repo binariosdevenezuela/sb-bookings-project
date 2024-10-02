@@ -1,16 +1,14 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { Business } from '../../businesses/entities/business.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, DeleteDateColumn } from 'typeorm';
+import { UserRoleEnum } from '../../common/enums'
+import { BusinessLocation } from 'src/business_locations/entities/business_location.entity';
 
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn()
   user_id: number;
 
-  @ManyToOne(() => Business, (business) => business.business_id, { nullable: true })
-  business: Business;
-
-  @Column({ length: 50, unique: true })
-  username: string;
+  @ManyToOne(() => BusinessLocation, (businessLocation) => businessLocation.id, { nullable: true })
+  businessLocation: BusinessLocation;
 
   @Column({ length: 50 })
   name: string;
@@ -27,12 +25,12 @@ export class User {
   @Column({ length: 255 })
   password: string;
 
-  @Column({ type: 'enum', enum: ['owner', 'worker'], default: 'owner' })
-  role: 'owner' | 'worker';
-
-  @Column({ type: 'enum', enum: ['admin', 'manager'], nullable: true })
-  platform_role: 'admin' | 'manager';
+  @Column({ type: 'enum', enum: UserRoleEnum, default: UserRoleEnum.Worker })
+  role: UserRoleEnum;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;
+
+  @DeleteDateColumn({ nullable: true }) // Permite manejar soft deletes
+  deletedAt?: Date;
 }

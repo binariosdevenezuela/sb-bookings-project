@@ -16,12 +16,16 @@ exports.UsersController = void 0;
 const common_1 = require("@nestjs/common");
 const users_service_1 = require("./users.service");
 const create_user_dto_1 = require("./dto/create-user.dto");
+const signup_dto_1 = require("./dto/signup.dto");
 let UsersController = class UsersController {
     constructor(usersService) {
         this.usersService = usersService;
     }
-    async register(createUserDto) {
-        return this.usersService.create(createUserDto);
+    async signup(signUpDto) {
+        return await this.usersService.signup(signUpDto);
+    }
+    async add(createUserDto) {
+        return await this.usersService.add();
     }
     findAll() {
         return this.usersService.findAll();
@@ -32,12 +36,21 @@ let UsersController = class UsersController {
 };
 exports.UsersController = UsersController;
 __decorate([
-    (0, common_1.Post)('register'),
+    (0, common_1.Post)('signup'),
+    (0, common_1.UsePipes)(new common_1.ValidationPipe()),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [signup_dto_1.SignUpDto]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "signup", null);
+__decorate([
+    (0, common_1.Post)('add'),
+    (0, common_1.UsePipes)(new common_1.ValidationPipe()),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_user_dto_1.CreateUserDto]),
     __metadata("design:returntype", Promise)
-], UsersController.prototype, "register", null);
+], UsersController.prototype, "add", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),

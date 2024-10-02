@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BusinessHour = void 0;
+const enums_1 = require("../../common/enums");
 const typeorm_1 = require("typeorm");
 const business_entity_1 = require("../../businesses/entities/business.entity");
 let BusinessHour = class BusinessHour {
@@ -24,7 +25,7 @@ __decorate([
     __metadata("design:type", business_entity_1.Business)
 ], BusinessHour.prototype, "business", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'enum', enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] }),
+    (0, typeorm_1.Column)({ type: 'enum', enum: enums_1.DayOfWeekEnum }),
     __metadata("design:type", String)
 ], BusinessHour.prototype, "day_of_week", void 0);
 __decorate([

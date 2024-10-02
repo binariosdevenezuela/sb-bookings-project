@@ -1,6 +1,7 @@
-import { Controller, Post, Body, Get, Param } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, UsePipes, ValidationPipe  } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
+import { SignUpDto } from './dto/signup.dto';
 
 @Controller('users')
 export class UsersController {
@@ -8,12 +9,20 @@ export class UsersController {
     private readonly usersService: UsersService
   ) {}
 
-  // Registro de usuario
-  @Post('register')
-  async register(
+  @Post('signup')
+  @UsePipes(new ValidationPipe()) 
+  async signup(
+    @Body() signUpDto: SignUpDto
+  ) {
+    return await this.usersService.signup(signUpDto);
+  }
+
+  @Post('add')
+  @UsePipes(new ValidationPipe())
+  async add(
     @Body() createUserDto: CreateUserDto
   ) {
-    return this.usersService.create(createUserDto);
+    return await this.usersService.add();
   }
 
   @Get()

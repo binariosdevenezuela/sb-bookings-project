@@ -9,6 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
+const session_entity_1 = require("./auth/entities/session.entity");
 const businesses_module_1 = require("./businesses/businesses.module");
 const appointments_module_1 = require("./appointments/appointments.module");
 const business_plan_overrides_module_1 = require("./business_plan_overrides/business_plan_overrides.module");
@@ -23,6 +24,10 @@ const services_module_1 = require("./services/services.module");
 const clients_module_1 = require("./clients/clients.module");
 const workers_module_1 = require("./workers/workers.module");
 const users_module_1 = require("./users/users.module");
+const business_locations_module_1 = require("./business_locations/business_locations.module");
+const auth_controller_1 = require("./auth/auth.controller");
+const session_module_1 = require("./auth/session.module");
+const sign_up_intent_module_1 = require("./sign-up-intent/sign-up-intent.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -39,6 +44,7 @@ exports.AppModule = AppModule = __decorate([
                 entities: [__dirname + '/**/*.entity{.ts,.js}'],
                 synchronize: true,
             }),
+            typeorm_1.TypeOrmModule.forFeature([session_entity_1.SessionEntity]),
             businesses_module_1.BusinessesModule,
             users_module_1.UsersModule,
             workers_module_1.WorkersModule,
@@ -52,8 +58,12 @@ exports.AppModule = AppModule = __decorate([
             business_breaks_module_1.BusinessBreaksModule,
             plans_module_1.PlansModule,
             subscriptions_module_1.SubscriptionsModule,
-            business_plan_overrides_module_1.BusinessPlanOverridesModule
+            business_plan_overrides_module_1.BusinessPlanOverridesModule,
+            business_locations_module_1.BusinessLocationsModule,
+            session_module_1.SessionModule,
+            sign_up_intent_module_1.SignUpIntentModule
         ],
+        controllers: [auth_controller_1.AuthController],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

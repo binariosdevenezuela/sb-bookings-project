@@ -1,12 +1,11 @@
+import { SchedulingModelEnum } from '../../common/enums';
+import { BusinessLocation } from '../../business_locations/entities/business_location.entity';
 export declare class Business {
     business_id: number;
     name: string;
-    address: string;
+    locations: BusinessLocation[];
     domain: string;
-    is_mobile: boolean;
-    latitude: number;
-    longitude: number;
-    service_radius: number;
-    scheduling_model: 'Predefined Blocks' | 'Service Duration';
+    scheduling_model: SchedulingModelEnum;
     created_at: Date;
+    deletedAt?: Date;
 }

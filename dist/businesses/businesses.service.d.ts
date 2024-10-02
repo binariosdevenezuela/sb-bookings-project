@@ -1,9 +1,13 @@
+import { Repository } from 'typeorm';
+import { Business } from './entities/business.entity';
 import { CreateBusinessDto } from './dto/create-business.dto';
 import { UpdateBusinessDto } from './dto/update-business.dto';
 export declare class BusinessesService {
-    create(createBusinessDto: CreateBusinessDto): string;
-    findAll(): string;
-    findOne(id: number): string;
-    update(id: number, updateBusinessDto: UpdateBusinessDto): string;
-    remove(id: number): string;
+    private businessRepository;
+    constructor(businessRepository: Repository<Business>);
+    create(createBusinessDto: CreateBusinessDto): Promise<Business>;
+    findAll(): Promise<string>;
+    findOne(id: number): Promise<string>;
+    update(id: number, updateBusinessDto: UpdateBusinessDto): Promise<string>;
+    remove(id: number): Promise<string>;
 }

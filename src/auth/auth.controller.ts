@@ -1,24 +1,21 @@
-// auth.controller.ts
-import { Controller, Post, Body, UnauthorizedException } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { LoginDto } from './dto/login.dto';
+import { ConflictException, Controller, Post, Req } from '@nestjs/common';
+import { Request } from 'express';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+    @Post('login')
+    login(@Req() req: Request) {
+      if(req.session.user) {
+        throw new ConflictException('There is a session already. User: ' + req.session.user.username);
+      }
 
-  // Ruta para el login
-  @Post('login')
-  async login(@Body() loginDto: LoginDto) {
-    // Verifica las credenciales del usuario
-    const user = await this.authService.validateUser(loginDto.username, loginDto.password);
-
-    if (!user) {
-      // Si las credenciales son incorrectas, lanza un error 401 Unauthorized
-      throw new UnauthorizedException('Invalid credentials');
+      req.session.user = { id: 1, username: 'john_doe' }; // Almacenar el usuario en la sesión
+      return { message: 'Login successful' };
     }
-
-    // Si las credenciales son correctas, genera el JWT y lo devuelve
-    return this.authService.login(user);
+  
+    @Post('logout')
+    logout(@Req() req: Request) {
+      req.session.destroy(() => {}); // Destruir la sesión del usuario
+      return { message: 'Logout successful' };
+    }
   }
-}

@@ -10,7 +10,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Business = void 0;
+const enums_1 = require("../../common/enums");
 const typeorm_1 = require("typeorm");
+const business_location_entity_1 = require("../../business_locations/entities/business_location.entity");
 let Business = class Business {
 };
 exports.Business = Business;
@@ -23,37 +25,25 @@ __decorate([
     __metadata("design:type", String)
 ], Business.prototype, "name", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ length: 255, nullable: true }),
-    __metadata("design:type", String)
-], Business.prototype, "address", void 0);
+    (0, typeorm_1.OneToMany)(() => business_location_entity_1.BusinessLocation, location => location.business),
+    __metadata("design:type", Array)
+], Business.prototype, "locations", void 0);
 __decorate([
     (0, typeorm_1.Column)({ length: 255, nullable: true }),
     __metadata("design:type", String)
 ], Business.prototype, "domain", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'boolean', default: false }),
-    __metadata("design:type", Boolean)
-], Business.prototype, "is_mobile", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ type: 'decimal', precision: 10, scale: 8, nullable: true }),
-    __metadata("design:type", Number)
-], Business.prototype, "latitude", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ type: 'decimal', precision: 11, scale: 8, nullable: true }),
-    __metadata("design:type", Number)
-], Business.prototype, "longitude", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ type: 'decimal', precision: 5, scale: 2, nullable: true }),
-    __metadata("design:type", Number)
-], Business.prototype, "service_radius", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ type: 'enum', enum: ['Predefined Blocks', 'Service Duration'], default: 'Service Duration' }),
+    (0, typeorm_1.Column)({ type: 'enum', enum: enums_1.SchedulingModelEnum, default: enums_1.SchedulingModelEnum.ServiceDuration }),
     __metadata("design:type", String)
 ], Business.prototype, "scheduling_model", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' }),
     __metadata("design:type", Date)
 ], Business.prototype, "created_at", void 0);
+__decorate([
+    (0, typeorm_1.DeleteDateColumn)({ nullable: true }),
+    __metadata("design:type", Date)
+], Business.prototype, "deletedAt", void 0);
 exports.Business = Business = __decorate([
     (0, typeorm_1.Entity)()
 ], Business);
