@@ -9,9 +9,9 @@ import { UpdateBusinessDto } from './dto/update-business.dto';
 export class BusinessesService {
   constructor(
     @InjectRepository(Business)
-    private businessRepository: Repository<Business>,
+    private businessRepository: Repository<Business>
   ) {}
-  
+
   async create(createBusinessDto: CreateBusinessDto) {
     const newUser = this.businessRepository.create(createBusinessDto);
     return await this.businessRepository.save(newUser);

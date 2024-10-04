@@ -11,7 +11,9 @@ describe('BusinessPlanOverridesController', () => {
       providers: [BusinessPlanOverridesService],
     }).compile();
 
-    controller = module.get<BusinessPlanOverridesController>(BusinessPlanOverridesController);
+    controller = module.get<BusinessPlanOverridesController>(
+      BusinessPlanOverridesController
+    );
   });
 
   it('should be defined', () => {

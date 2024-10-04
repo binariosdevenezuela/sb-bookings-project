@@ -1,6 +1,9 @@
-import { ISession } from 'connect-typeorm';
-export declare class SessionEntity implements ISession {
-    expiredAt: number;
-    id: string;
-    json: string;
+import { User } from 'src/users/entities/user.entity';
+export declare class SessionEntity {
+  id: string;
+  user: User;
+  json: string;
+  logged_on: Date;
+  expiredAt: number;
+  deletedAt?: Date;
 }

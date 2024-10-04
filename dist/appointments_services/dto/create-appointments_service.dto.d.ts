@@ -1,2 +1,1 @@
-export declare class CreateAppointmentsServiceDto {
-}
+export declare class CreateAppointmentsServiceDto {}

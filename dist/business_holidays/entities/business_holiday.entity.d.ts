@@ -1,7 +1,7 @@
 import { Business } from '../../businesses/entities/business.entity';
 export declare class BusinessHoliday {
-    business_holiday_id: number;
-    business: Business;
-    holiday_date: string;
-    description: string;
+  business_holiday_id: number;
+  business: Business;
+  holiday_date: string;
+  description: string;
 }

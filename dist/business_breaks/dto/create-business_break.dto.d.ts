@@ -1,2 +1,1 @@
-export declare class CreateBusinessBreakDto {
-}
+export declare class CreateBusinessBreakDto {}

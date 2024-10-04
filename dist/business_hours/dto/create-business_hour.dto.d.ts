@@ -1,2 +1,1 @@
-export declare class CreateBusinessHourDto {
-}
+export declare class CreateBusinessHourDto {}

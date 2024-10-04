@@ -1,2 +1,1 @@
-export declare class CreateClientDto {
-}
+export declare class CreateClientDto {}

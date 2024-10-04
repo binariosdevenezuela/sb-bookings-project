@@ -1,13 +1,12 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { Business } from '../../businesses/entities/business.entity';
 
-
 @Entity('business_locations')
 export class BusinessLocation {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Business, business => business.locations)
+  @ManyToOne(() => Business, (business) => business.locations)
   business: Business;
 
   @Column({ type: 'boolean', default: false })

@@ -1,32 +1,54 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  ConflictException,
+  BadRequestException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { SignUpIntent } from '../sign-up-intent/entities/sign-up-intent.entity';
 import { CreateSignUpIntentDto } from './dto/create-sign-up-intent.dto';
 import { UpdateSignUpIntentDto } from './dto/update-sign-up-intent.dto';
-
+import { UsersService } from 'src/users/users.service';
+import { User } from 'src/users/entities/user.entity';
+import { NotFoundError } from 'rxjs';
 
 @Injectable()
 export class SignUpIntentService {
-
   constructor(
     @InjectRepository(SignUpIntent)
-    private signUpRepository: Repository<SignUpIntent>
+    private signUpIntentRepository: Repository<SignUpIntent>,
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
+    private usersService: UsersService
   ) {}
 
-  async create(signUpDto: CreateSignUpIntentDto): Promise<SignUpIntent> {
+  async create(signUpDto: CreateSignUpIntentDto) {
+    const signUpIntent = await this.userRepository.findOne({
+      where: { email: signUpDto.email },
+    });
 
-    const newSignUpIntent = new SignUpIntent();
-    signUpDto.user.password = await bcrypt.hash(signUpDto.user.password, 10);
-    newSignUpIntent.object = signUpDto;
-    newSignUpIntent.code = "012563";
-    return await this.signUpRepository.save(newSignUpIntent);
+    if (signUpIntent) {
+      throw new ConflictException('There is an user with this email.');
+    } else {
+      const newSignUpIntent = new SignUpIntent();
 
+      signUpDto.password = await bcrypt.hash(signUpDto.password, 10);
+      newSignUpIntent.object = signUpDto;
+      newSignUpIntent.code = this.generateRandomSixDigitNumber();
+      await this.signUpIntentRepository.save(newSignUpIntent);
+    }
   }
 
-  findAll() {
-    return `This action returns all signUpIntent`;
+  async complete(id: string, code: string): Promise<User> {
+    const signUpIntent = await this.signUpIntentRepository.findOne({
+      where: { id, code },
+    });
+    if (signUpIntent) {
+      return this.usersService.signup(signUpIntent);
+    } else {
+      throw new BadRequestException('No valid.');
+    }
   }
 
   findOne(id: number) {
@@ -39,5 +61,11 @@ export class SignUpIntentService {
 
   remove(id: number) {
     return `This action removes a #${id} signUpIntent`;
+  }
+
+  generateRandomSixDigitNumber(): string {
+    return Math.floor(100000 + Math.random() * 900000)
+      .toString()
+      .padStart(6, '0');
   }
 }

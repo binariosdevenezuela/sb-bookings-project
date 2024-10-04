@@ -1,15 +1,27 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { BusinessPlanOverridesService } from './business_plan_overrides.service';
 import { CreateBusinessPlanOverrideDto } from './dto/create-business_plan_override.dto';
 import { UpdateBusinessPlanOverrideDto } from './dto/update-business_plan_override.dto';
 
 @Controller('business-plan-overrides')
 export class BusinessPlanOverridesController {
-  constructor(private readonly businessPlanOverridesService: BusinessPlanOverridesService) {}
+  constructor(
+    private readonly businessPlanOverridesService: BusinessPlanOverridesService
+  ) {}
 
   @Post()
   create(@Body() createBusinessPlanOverrideDto: CreateBusinessPlanOverrideDto) {
-    return this.businessPlanOverridesService.create(createBusinessPlanOverrideDto);
+    return this.businessPlanOverridesService.create(
+      createBusinessPlanOverrideDto
+    );
   }
 
   @Get()
@@ -23,8 +35,14 @@ export class BusinessPlanOverridesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateBusinessPlanOverrideDto: UpdateBusinessPlanOverrideDto) {
-    return this.businessPlanOverridesService.update(+id, updateBusinessPlanOverrideDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateBusinessPlanOverrideDto: UpdateBusinessPlanOverrideDto
+  ) {
+    return this.businessPlanOverridesService.update(
+      +id,
+      updateBusinessPlanOverrideDto
+    );
   }
 
   @Delete(':id')

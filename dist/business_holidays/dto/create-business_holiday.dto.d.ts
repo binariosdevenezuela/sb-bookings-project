@@ -1,2 +1,1 @@
-export declare class CreateBusinessHolidayDto {
-}
+export declare class CreateBusinessHolidayDto {}

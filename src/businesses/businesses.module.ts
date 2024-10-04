@@ -6,8 +6,8 @@ import { BusinessesController } from './businesses.controller';
 
 @Module({
   imports: [
-  TypeOrmModule.forFeature([Business]), // Registrar la entidad Business
-],
+    TypeOrmModule.forFeature([Business]), // Registrar la entidad Business
+  ],
   controllers: [BusinessesController],
   providers: [BusinessesService],
 })

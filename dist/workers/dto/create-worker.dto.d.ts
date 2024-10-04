@@ -1,2 +1,1 @@
-export declare class CreateWorkerDto {
-}
+export declare class CreateWorkerDto {}

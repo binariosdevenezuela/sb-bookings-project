@@ -9,7 +9,9 @@ describe('BusinessPlanOverridesService', () => {
       providers: [BusinessPlanOverridesService],
     }).compile();
 
-    service = module.get<BusinessPlanOverridesService>(BusinessPlanOverridesService);
+    service = module.get<BusinessPlanOverridesService>(
+      BusinessPlanOverridesService
+    );
   });
 
   it('should be defined', () => {

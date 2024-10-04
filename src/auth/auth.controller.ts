@@ -1,21 +1,57 @@
-import { ConflictException, Controller, Post, Req } from '@nestjs/common';
+import {
+  ConflictException,
+  Controller,
+  Post,
+  Req,
+  Res,
+  HttpStatus,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { Request } from 'express';
+import { UsersService } from 'src/users/users.service';
+import { AuthService } from './auth.service';
+import { ResponseService } from 'src/response/response.service';
+import { Response } from 'express';
 
 @Controller('auth')
 export class AuthController {
-    @Post('login')
-    login(@Req() req: Request) {
-      if(req.session.user) {
-        throw new ConflictException('There is a session already. User: ' + req.session.user.username);
-      }
+  constructor(
+    private readonly authService: AuthService,
+    private readonly responseService: ResponseService
+  ) {}
 
-      req.session.user = { id: 1, username: 'john_doe' }; // Almacenar el usuario en la sesión
-      return { message: 'Login successful' };
+  @Post('login')
+  async login(@Req() req: Request, @Res() res: Response) {
+    if (req.session.user) {
+      throw new ConflictException('There is a session already.');
     }
-  
-    @Post('logout')
-    logout(@Req() req: Request) {
-      req.session.destroy(() => {}); // Destruir la sesión del usuario
-      return { message: 'Logout successful' };
+
+    const { email, password } = req.body;
+    const user = await this.authService.validateUser(email, password);
+
+    if (user) {
+      req.session.user = user;
+
+      return res
+        .status(HttpStatus.OK)
+        .json(
+          this.responseService.success('Login successful', req.session.user)
+        );
+    } else {
+      throw new UnauthorizedException('Invalid credentials');
     }
   }
+
+  @Post('logout')
+  logout(@Req() req: Request, @Res() res: Response) {
+    if (req.session.user) {
+      req.session.destroy(() => {});
+
+      return res
+        .status(HttpStatus.OK)
+        .json(this.responseService.success('Logout successful'));
+    } else {
+      throw new UnauthorizedException('No session to destroy');
+    }
+  }
+}

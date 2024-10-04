@@ -1,2 +1,1 @@
-export declare class CreateSubscriptionDto {
-}
+export declare class CreateSubscriptionDto {}

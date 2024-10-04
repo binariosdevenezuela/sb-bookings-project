@@ -1,5 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, DeleteDateColumn } from 'typeorm';
-import { UserRoleEnum } from '../../common/enums'
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  DeleteDateColumn,
+} from 'typeorm';
+import { UserRoleEnum } from '../../common/enums';
+import { Business } from 'src/businesses/entities/business.entity';
 import { BusinessLocation } from 'src/business_locations/entities/business_location.entity';
 
 @Entity('users')
@@ -7,7 +14,14 @@ export class User {
   @PrimaryGeneratedColumn()
   user_id: number;
 
-  @ManyToOne(() => BusinessLocation, (businessLocation) => businessLocation.id, { nullable: true })
+  @ManyToOne(() => Business, (business) => business.business_id)
+  business: Business;
+
+  @ManyToOne(
+    () => BusinessLocation,
+    (businessLocation) => businessLocation.id,
+    { nullable: true }
+  )
   businessLocation: BusinessLocation;
 
   @Column({ length: 50 })

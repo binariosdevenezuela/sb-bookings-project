@@ -17,17 +17,18 @@ import { WorkersModule } from './workers/workers.module';
 import { UsersModule } from './users/users.module';
 import { BusinessLocationsModule } from './business_locations/business_locations.module';
 import { AuthController } from './auth/auth.controller';
-import { SessionModule } from './auth/session.module'; // Importa el módulo de sesiones
 import { SignUpIntentModule } from './sign-up-intent/sign-up-intent.module';
-
+import { AuthService } from './auth/auth.service';
+import { AuthModule } from './auth/auth.module';
+import { ResponseService } from './response/response.service';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'mysql', 
+      type: 'mysql',
       host: 'localhost',
       port: 3306,
-      username: 'root', 
+      username: 'root',
       password: '12345678',
       database: 'bookings',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
@@ -49,9 +50,9 @@ import { SignUpIntentModule } from './sign-up-intent/sign-up-intent.module';
     SubscriptionsModule,
     BusinessPlanOverridesModule,
     BusinessLocationsModule,
-    SessionModule,
-    SignUpIntentModule
+    SignUpIntentModule,
+    AuthModule,
   ],
-  controllers: [AuthController],
+  providers: [ResponseService],
 })
 export class AppModule {}

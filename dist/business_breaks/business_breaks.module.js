@@ -1,22 +1,37 @@
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+'use strict';
+var __decorate =
+  (this && this.__decorate) ||
+  function (decorators, target, key, desc) {
+    var c = arguments.length,
+      r =
+        c < 3
+          ? target
+          : desc === null
+            ? (desc = Object.getOwnPropertyDescriptor(target, key))
+            : desc,
+      d;
+    if (typeof Reflect === 'object' && typeof Reflect.decorate === 'function')
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if ((d = decorators[i]))
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
+  };
+Object.defineProperty(exports, '__esModule', { value: true });
 exports.BusinessBreaksModule = void 0;
-const common_1 = require("@nestjs/common");
-const business_breaks_service_1 = require("./business_breaks.service");
-const business_breaks_controller_1 = require("./business_breaks.controller");
-let BusinessBreaksModule = class BusinessBreaksModule {
-};
+const common_1 = require('@nestjs/common');
+const business_breaks_service_1 = require('./business_breaks.service');
+const business_breaks_controller_1 = require('./business_breaks.controller');
+let BusinessBreaksModule = class BusinessBreaksModule {};
 exports.BusinessBreaksModule = BusinessBreaksModule;
-exports.BusinessBreaksModule = BusinessBreaksModule = __decorate([
+exports.BusinessBreaksModule = BusinessBreaksModule = __decorate(
+  [
     (0, common_1.Module)({
-        controllers: [business_breaks_controller_1.BusinessBreaksController],
-        providers: [business_breaks_service_1.BusinessBreaksService],
-    })
-], BusinessBreaksModule);
+      controllers: [business_breaks_controller_1.BusinessBreaksController],
+      providers: [business_breaks_service_1.BusinessBreaksService],
+    }),
+  ],
+  BusinessBreaksModule
+);
 //# sourceMappingURL=business_breaks.module.js.map

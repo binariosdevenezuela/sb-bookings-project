@@ -24,7 +24,7 @@ async function bootstrap() {
         maxAge: 3600000, // Expira en 1 hora
         sameSite: 'strict', // Protección CSRF
       },
-    }),
+    })
   );
 
   app.useGlobalPipes(
@@ -32,9 +32,9 @@ async function bootstrap() {
       whitelist: true, // Solo permite campos definidos en el DTO
       forbidNonWhitelisted: true, // Rechaza campos que no estén en el DTO
       forbidUnknownValues: true, // Asegura que los valores desconocidos generen error
-      transform: true
-    }),
-  );  
+      transform: true,
+    })
+  );
 
   await app.listen(3000);
 }

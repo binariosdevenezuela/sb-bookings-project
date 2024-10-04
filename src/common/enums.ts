@@ -10,15 +10,16 @@ export enum DayOfWeekEnum {
 
 export enum UserRoleEnum {
   Owner = 'owner',
-  Worker = 'worker'
+  Manager = 'manager',
+  Worker = 'worker',
 }
 
 export enum UserPlatformRoleEnum {
   Owner = 'admin',
-  Worker = 'manager'
+  Worker = 'manager',
 }
 
 export enum SchedulingModelEnum {
   PredefinedBlocks = 'Predefined Blocks',
-  ServiceDuration = 'Service Duration'
-} 
+  ServiceDuration = 'Service Duration',
+}

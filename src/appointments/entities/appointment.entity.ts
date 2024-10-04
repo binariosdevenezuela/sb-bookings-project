@@ -32,6 +32,10 @@ export class Appointment {
   @Column({ type: 'decimal', precision: 11, scale: 8, nullable: true })
   longitude: number;
 
-  @Column({ type: 'enum', enum: ['Scheduled', 'In Progress', 'Completed'], default: 'Scheduled' })
+  @Column({
+    type: 'enum',
+    enum: ['Scheduled', 'In Progress', 'Completed'],
+    default: 'Scheduled',
+  })
   appointment_status: 'Scheduled' | 'In Progress' | 'Completed';
 }

@@ -3,12 +3,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { SignUpIntentService } from './sign-up-intent.service';
 import { SignUpIntentController } from './sign-up-intent.controller';
 import { SignUpIntent } from './entities/sign-up-intent.entity';
+import { UsersService } from 'src/users/users.service';
+import { User } from 'src/users/entities/user.entity';
+import { ResponseService } from 'src/response/response.service';
 
 @Module({
   controllers: [SignUpIntentController],
-  providers: [SignUpIntentService],
-  imports: [
-    TypeOrmModule.forFeature([SignUpIntent]), // Registra el repositorio de User como provider
-  ],
+  providers: [SignUpIntentService, UsersService, ResponseService],
+  imports: [TypeOrmModule.forFeature([SignUpIntent, User])],
 })
 export class SignUpIntentModule {}

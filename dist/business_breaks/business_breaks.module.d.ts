@@ -1,2 +1,1 @@
-export declare class BusinessBreaksModule {
-}
+export declare class BusinessBreaksModule {}

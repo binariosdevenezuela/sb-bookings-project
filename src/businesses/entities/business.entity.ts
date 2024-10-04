@@ -1,6 +1,14 @@
-import { SchedulingModelEnum } from '../../common/enums'
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, DeleteDateColumn } from 'typeorm';
+import { SchedulingModelEnum } from '../../common/enums';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  DeleteDateColumn,
+  ManyToOne,
+} from 'typeorm';
 import { BusinessLocation } from '../../business_locations/entities/business_location.entity';
+import { User } from 'src/users/entities/user.entity';
 
 @Entity()
 export class Business {
@@ -10,13 +18,17 @@ export class Business {
   @Column({ length: 255 })
   name: string;
 
-  @OneToMany(() => BusinessLocation, location => location.business)
+  @OneToMany(() => BusinessLocation, (location) => location.business)
   locations: BusinessLocation[];
 
   @Column({ length: 255, nullable: true })
   domain: string;
 
-  @Column({ type: 'enum', enum: SchedulingModelEnum, default: SchedulingModelEnum.ServiceDuration })
+  @Column({
+    type: 'enum',
+    enum: SchedulingModelEnum,
+    default: SchedulingModelEnum.ServiceDuration,
+  })
   scheduling_model: SchedulingModelEnum;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })

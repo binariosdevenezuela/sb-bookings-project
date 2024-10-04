@@ -16,7 +16,10 @@ export class BusinessPlanOverridesService {
     return `This action returns a #${id} businessPlanOverride`;
   }
 
-  update(id: number, updateBusinessPlanOverrideDto: UpdateBusinessPlanOverrideDto) {
+  update(
+    id: number,
+    updateBusinessPlanOverrideDto: UpdateBusinessPlanOverrideDto
+  ) {
     return `This action updates a #${id} businessPlanOverride`;
   }
 

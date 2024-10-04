@@ -1,2 +1,1 @@
-export declare class CreateServiceAreaDto {
-}
+export declare class CreateServiceAreaDto {}

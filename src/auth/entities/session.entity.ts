@@ -1,15 +1,31 @@
-import { Entity, Column, Index, PrimaryColumn } from 'typeorm';
-import { ISession } from 'connect-typeorm'; // Importar la interfaz ISession
+import {
+  Entity,
+  Column,
+  Index,
+  PrimaryColumn,
+  DeleteDateColumn,
+  ManyToOne,
+} from 'typeorm';
+import { User } from 'src/users/entities/user.entity';
 
 @Entity('sessions')
-export class SessionEntity implements ISession {
+export class SessionEntity {
+  @PrimaryColumn('varchar', { length: 255 })
+  id: string;
+
+  @ManyToOne(() => User, (user) => user.user_id)
+  user: User;
+
+  @Column('text')
+  json: string;
+
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  logged_on: Date;
+
   @Index()
   @Column('bigint')
   expiredAt: number;
 
-  @PrimaryColumn('varchar', { length: 255 })
-  id: string;
-
-  @Column('text')
-  json: string;
+  @DeleteDateColumn()
+  deletedAt?: Date;
 }

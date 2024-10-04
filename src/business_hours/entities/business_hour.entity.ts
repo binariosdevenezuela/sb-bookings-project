@@ -1,4 +1,4 @@
-import { DayOfWeekEnum } from '../../common/enums'
+import { DayOfWeekEnum } from '../../common/enums';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { Business } from '../../businesses/entities/business.entity';
 

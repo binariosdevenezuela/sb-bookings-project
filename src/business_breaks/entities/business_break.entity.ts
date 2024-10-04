@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { DayOfWeekEnum } from '../../common/enums'
+import { DayOfWeekEnum } from '../../common/enums';
 import { Business } from '../../businesses/entities/business.entity';
 
 @Entity('business_breaks')
