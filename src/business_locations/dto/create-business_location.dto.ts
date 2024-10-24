@@ -1,13 +1,9 @@
 import {
-  IsString,
   IsBoolean,
-  IsNumber,
-  IsEmail,
   IsNotEmpty,
-  MinLength,
-  ValidateNested,
-  ValidateIf,
+  ValidateIf
 } from 'class-validator';
+
 export class CreateBusinessLocationDto {
   @IsNotEmpty()
   @IsBoolean()
@@ -43,4 +39,5 @@ export class CreateBusinessLocationDto {
 
   @IsNotEmpty()
   phone: string;
+
 }

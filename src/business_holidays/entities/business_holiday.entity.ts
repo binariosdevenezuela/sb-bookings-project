@@ -4,9 +4,9 @@ import { Business } from '../../businesses/entities/business.entity';
 @Entity('business_holidays')
 export class BusinessHoliday {
   @PrimaryGeneratedColumn()
-  business_holiday_id: number;
+  id: number;
 
-  @ManyToOne(() => Business, (business) => business.business_id)
+  @ManyToOne(() => Business, (business) => business.locations, { nullable: false, onDelete: 'CASCADE' })
   business: Business;
 
   @Column({ type: 'date' })

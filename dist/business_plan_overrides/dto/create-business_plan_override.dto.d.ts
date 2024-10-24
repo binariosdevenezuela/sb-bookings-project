@@ -1,1 +1,2 @@
-export declare class CreateBusinessPlanOverrideDto {}
+export declare class CreateBusinessPlanOverrideDto {
+}

@@ -1,4 +1,15 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateBusinessDto } from './create-business.dto';
+import { IsString, IsNotEmpty, IsEnum, IsOptional } from 'class-validator';
+import { SchedulingModelEnum } from 'src/common/enums';
 
-export class UpdateBusinessDto extends PartialType(CreateBusinessDto) {}
+export class UpdateBusinessDto {
+    
+    @IsOptional()
+    @IsNotEmpty()
+    @IsString()
+    name: string;
+  
+    @IsOptional()
+    @IsNotEmpty()
+    @IsEnum(SchedulingModelEnum)
+    scheduling_model: SchedulingModelEnum;
+}

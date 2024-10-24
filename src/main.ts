@@ -14,25 +14,25 @@ async function bootstrap() {
 
   app.use(
     session({
-      secret: '948u89sj9j', // Llave secreta para la cookie de sesión
+      secret: '948u89sj9j',
       resave: false,
       saveUninitialized: false,
-      store: new TypeormStore().connect(sessionRepository), // Conecta el repositorio de sesiones
+      store: new TypeormStore().connect(sessionRepository),
       cookie: {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production', // Solo HTTPS en producción
-        maxAge: 3600000, // Expira en 1 hora
-        sameSite: 'strict', // Protección CSRF
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 3600000,
+        sameSite: 'strict',
       },
     })
   );
 
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true, // Solo permite campos definidos en el DTO
-      forbidNonWhitelisted: true, // Rechaza campos que no estén en el DTO
-      forbidUnknownValues: true, // Asegura que los valores desconocidos generen error
-      transform: true,
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      forbidUnknownValues: true,
+      transform: true
     })
   );
 

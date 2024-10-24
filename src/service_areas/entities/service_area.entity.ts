@@ -4,9 +4,9 @@ import { Business } from '../../businesses/entities/business.entity';
 @Entity('service_areas')
 export class ServiceArea {
   @PrimaryGeneratedColumn()
-  service_area_id: number;
+  id: number;
 
-  @ManyToOne(() => Business, (business) => business.business_id)
+  @ManyToOne(() => Business, (business) => business.id)
   business: Business;
 
   @Column({ length: 20 })

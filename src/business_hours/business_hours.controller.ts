@@ -1,45 +1,25 @@
 import {
   Controller,
-  Get,
-  Post,
   Body,
-  Patch,
   Param,
-  Delete,
+  Patch,
 } from '@nestjs/common';
 import { BusinessHoursService } from './business_hours.service';
-import { CreateBusinessHourDto } from './dto/create-business_hour.dto';
 import { UpdateBusinessHourDto } from './dto/update-business_hour.dto';
 
-@Controller('business-hours')
+@Controller('my-business/locations/:locationId/hours')
 export class BusinessHoursController {
   constructor(private readonly businessHoursService: BusinessHoursService) {}
 
-  @Post()
-  create(@Body() createBusinessHourDto: CreateBusinessHourDto) {
-    return this.businessHoursService.create(createBusinessHourDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.businessHoursService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.businessHoursService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
+  @Patch()
+  async update(
+    @Param('locationId') locationId: string,
     @Body() updateBusinessHourDto: UpdateBusinessHourDto
   ) {
-    return this.businessHoursService.update(+id, updateBusinessHourDto);
+
+    await this.businessHoursService.update(+locationId, updateBusinessHourDto);
+    return "Edited successfully."
+    
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.businessHoursService.remove(+id);
-  }
 }

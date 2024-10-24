@@ -1,20 +1,20 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToOne } from 'typeorm';
 import { Client } from '../../clients/entities/client.entity';
 import { Worker } from '../../workers/entities/worker.entity';
 import { Service } from '../../services/entities/service.entity';
 
-@Entity('appointments')
+@Entity()
 export class Appointment {
   @PrimaryGeneratedColumn()
-  appointment_id: number;
+  id: number;
 
-  @ManyToOne(() => Client, (client) => client.client_id)
+  @OneToOne(() => Client, (client) => client.appointments, { nullable: false })
   client: Client;
 
-  @ManyToOne(() => Worker, (worker) => worker.worker_id)
+  @ManyToOne(() => Worker, (worker) => worker.appointments, { nullable: false })
   worker: Worker;
 
-  @ManyToOne(() => Service, (service) => service.service_id)
+  @ManyToOne(() => Service, (service) => service.appointments, { nullable: false })
   service: Service;
 
   @Column({ type: 'datetime' })
@@ -25,12 +25,6 @@ export class Appointment {
 
   @Column({ length: 255, nullable: true })
   service_location: string;
-
-  @Column({ type: 'decimal', precision: 10, scale: 8, nullable: true })
-  latitude: number;
-
-  @Column({ type: 'decimal', precision: 11, scale: 8, nullable: true })
-  longitude: number;
 
   @Column({
     type: 'enum',

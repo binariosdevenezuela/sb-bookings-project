@@ -8,16 +8,13 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { Request } from 'express';
-import { UsersService } from 'src/users/users.service';
 import { AuthService } from './auth.service';
-import { ResponseService } from 'src/response/response.service';
 import { Response } from 'express';
 
 @Controller('auth')
 export class AuthController {
   constructor(
-    private readonly authService: AuthService,
-    private readonly responseService: ResponseService
+    private readonly authService: AuthService
   ) {}
 
   @Post('login')
@@ -32,11 +29,7 @@ export class AuthController {
     if (user) {
       req.session.user = user;
 
-      return res
-        .status(HttpStatus.OK)
-        .json(
-          this.responseService.success('Login successful', req.session.user)
-        );
+      return "Welcome."
     } else {
       throw new UnauthorizedException('Invalid credentials');
     }
@@ -46,10 +39,8 @@ export class AuthController {
   logout(@Req() req: Request, @Res() res: Response) {
     if (req.session.user) {
       req.session.destroy(() => {});
-
-      return res
-        .status(HttpStatus.OK)
-        .json(this.responseService.success('Logout successful'));
+      res.clearCookie('connect.sid');
+      return "Logged out successfully."
     } else {
       throw new UnauthorizedException('No session to destroy');
     }

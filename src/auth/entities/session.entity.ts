@@ -13,7 +13,7 @@ export class SessionEntity {
   @PrimaryColumn('varchar', { length: 255 })
   id: string;
 
-  @ManyToOne(() => User, (user) => user.user_id)
+  @ManyToOne(() => User, (user) => user.id)
   user: User;
 
   @Column('text')

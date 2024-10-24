@@ -6,20 +6,22 @@ import {
   Patch,
   Param,
   Delete,
+  Session
 } from '@nestjs/common';
 import { BusinessLocationsService } from './business_locations.service';
 import { CreateBusinessLocationDto } from './dto/create-business_location.dto';
 import { UpdateBusinessLocationDto } from './dto/update-business_location.dto';
+import { SessionData } from 'express-session';
 
-@Controller('business-locations')
+@Controller('my-business/locations')
 export class BusinessLocationsController {
   constructor(
     private readonly businessLocationsService: BusinessLocationsService
   ) {}
 
   @Post()
-  create(@Body() createBusinessLocationDto: CreateBusinessLocationDto) {
-    return this.businessLocationsService.create(createBusinessLocationDto);
+  create(@Body() createBusinessLocationDto: CreateBusinessLocationDto, @Session() session: SessionData) {
+    return this.businessLocationsService.insert(session.user.business, createBusinessLocationDto);
   }
 
   @Get()

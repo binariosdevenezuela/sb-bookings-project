@@ -1,13 +1,25 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm';
 import { Business } from '../../businesses/entities/business.entity';
+import { Service } from 'src/services/entities/service.entity';
+import { BusinessHour } from 'src/business_hours/entities/business_hour.entity';
+import { User } from 'src/users/entities/user.entity';
 
 @Entity('business_locations')
 export class BusinessLocation {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Business, (business) => business.locations)
+  @ManyToOne(() => Business, (business) => business.locations, { nullable: false })
   business: Business;
+
+  @OneToMany(() => BusinessHour, (businessHour) => businessHour.location, { cascade: true })
+  businessHours: BusinessHour[];
+
+  @OneToMany(() => Service, (service) => service.location)
+  services: Service[];
+
+  @OneToMany(() => User, (user) => user.businessLocation)
+  users: User[]
 
   @Column({ type: 'boolean', default: false })
   is_mobile: boolean;
@@ -35,4 +47,7 @@ export class BusinessLocation {
 
   @Column({ length: 15 })
   phone: string;
+
+  @Column({ type: 'varchar', length: 50, nullable: false })
+  timezone: string; 
 }

@@ -14,14 +14,11 @@ import { SignUpIntentService } from './sign-up-intent.service';
 import { CreateSignUpIntentDto } from './dto/create-sign-up-intent.dto';
 import { UpdateSignUpIntentDto } from './dto/update-sign-up-intent.dto';
 import { Response } from 'express';
-import { Request } from 'express';
-import { ResponseService } from 'src/response/response.service';
 
 @Controller('sign-up-intent')
 export class SignUpIntentController {
   constructor(
-    private readonly signUpIntentService: SignUpIntentService,
-    private readonly responseService: ResponseService
+    private readonly signUpIntentService: SignUpIntentService
   ) {}
 
   @Post()
@@ -30,13 +27,7 @@ export class SignUpIntentController {
     @Res() res: Response
   ) {
     await this.signUpIntentService.create(createSignUpIntentDto);
-    return res
-      .status(HttpStatus.OK)
-      .json(
-        this.responseService.success(
-          'Confirm email by going to the link sent to your email.'
-        )
-      );
+
   }
 
   @Get('complete/:id/:code')

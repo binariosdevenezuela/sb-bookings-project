@@ -11,7 +11,6 @@ import { CreateSignUpIntentDto } from './dto/create-sign-up-intent.dto';
 import { UpdateSignUpIntentDto } from './dto/update-sign-up-intent.dto';
 import { UsersService } from 'src/users/users.service';
 import { User } from 'src/users/entities/user.entity';
-import { NotFoundError } from 'rxjs';
 
 @Injectable()
 export class SignUpIntentService {
@@ -45,7 +44,17 @@ export class SignUpIntentService {
       where: { id, code },
     });
     if (signUpIntent) {
+      
+      const user = await this.userRepository.findOne(
+        { where : {email: signUpIntent.object.email}}
+      )
+      
+      if(user) {
+        throw new ConflictException('User exists already.');
+      }
+
       return this.usersService.signup(signUpIntent);
+
     } else {
       throw new BadRequestException('No valid.');
     }

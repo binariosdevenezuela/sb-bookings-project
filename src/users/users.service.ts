@@ -1,12 +1,8 @@
 import { Injectable, ConflictException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { QueryRunner, DataSource } from 'typeorm';
-import * as bcrypt from 'bcrypt';
+import { DataSource } from 'typeorm';
 import { User } from './entities/user.entity';
-import { Business } from 'src/businesses/entities/business.entity';
-import { BusinessLocation } from 'src/business_locations/entities/business_location.entity';
-import { CreateSignUpIntentDto } from 'src/sign-up-intent/dto/create-sign-up-intent.dto';
 import { UserRoleEnum } from 'src/common/enums';
 import { SignUpIntent } from 'src/sign-up-intent/entities/sign-up-intent.entity';
 
@@ -28,14 +24,6 @@ export class UsersService {
 
     try {
       await queryRunner.startTransaction();
-
-      const user = await queryRunner.manager.findOne(User, {
-        where: { email },
-      });
-
-      if (user) {
-        throw new ConflictException('User exists already.');
-      }
 
       const newUser = new User();
       newUser.email = email;
@@ -69,6 +57,6 @@ export class UsersService {
   }
 
   async findOne(user_id: number): Promise<User> {
-    return await this.usersRepository.findOne({ where: { user_id } }); // Búsqueda por `user_id`
+    return await this.usersRepository.findOne({ where: { id: user_id } }); // Búsqueda por `user_id`
   }
 }

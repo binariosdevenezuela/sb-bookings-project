@@ -1,1 +1,2 @@
-export declare class SignUpIntentModule {}
+export declare class SignUpIntentModule {
+}

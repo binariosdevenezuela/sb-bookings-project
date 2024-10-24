@@ -5,12 +5,12 @@ import { Plan } from '../../plans/entities/plan.entity';
 @Entity('subscriptions')
 export class Subscription {
   @PrimaryGeneratedColumn()
-  subscription_id: number;
+  id: number;
 
-  @ManyToOne(() => Business, (business) => business.business_id)
+  @ManyToOne(() => Business, (business) => business.id)
   business: Business;
 
-  @ManyToOne(() => Plan, (plan) => plan.plan_id)
+  @ManyToOne(() => Plan, (plan) => plan.id)
   plan: Plan;
 
   @Column({ type: 'date' })

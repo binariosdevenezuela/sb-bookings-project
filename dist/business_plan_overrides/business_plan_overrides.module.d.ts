@@ -1,1 +1,2 @@
-export declare class BusinessPlanOverridesModule {}
+export declare class BusinessPlanOverridesModule {
+}

@@ -5,11 +5,10 @@ import { SignUpIntentController } from './sign-up-intent.controller';
 import { SignUpIntent } from './entities/sign-up-intent.entity';
 import { UsersService } from 'src/users/users.service';
 import { User } from 'src/users/entities/user.entity';
-import { ResponseService } from 'src/response/response.service';
 
 @Module({
   controllers: [SignUpIntentController],
-  providers: [SignUpIntentService, UsersService, ResponseService],
+  providers: [SignUpIntentService, UsersService],
   imports: [TypeOrmModule.forFeature([SignUpIntent, User])],
 })
 export class SignUpIntentModule {}

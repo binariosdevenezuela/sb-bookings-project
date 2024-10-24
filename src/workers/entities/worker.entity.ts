@@ -1,13 +1,17 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm';
 import { Business } from '../../businesses/entities/business.entity';
+import { Appointment } from 'src/appointments/entities/appointment.entity';
 
 @Entity('workers')
 export class Worker {
   @PrimaryGeneratedColumn()
-  worker_id: number;
+  id: number;
 
-  @ManyToOne(() => Business, (business) => business.business_id)
+  @ManyToOne(() => Business, (business) => business.id)
   business: Business;
+
+  @OneToMany(() => Appointment, (appointment) => appointment.worker)
+  appointments: Appointment[]
 
   @Column({ length: 255 })
   name: string;

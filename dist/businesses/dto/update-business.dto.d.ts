@@ -1,6 +1,5 @@
-import { CreateBusinessDto } from './create-business.dto';
-declare const UpdateBusinessDto_base: import('@nestjs/mapped-types').MappedType<
-  Partial<CreateBusinessDto>
->;
-export declare class UpdateBusinessDto extends UpdateBusinessDto_base {}
-export {};
+import { SchedulingModelEnum } from 'src/common/enums';
+export declare class UpdateBusinessDto {
+    name: string;
+    scheduling_model: SchedulingModelEnum;
+}

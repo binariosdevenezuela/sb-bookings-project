@@ -1,45 +1,36 @@
 import {
   Controller,
-  Get,
   Post,
   Body,
   Patch,
-  Param,
-  Delete,
+  HttpStatus,
+  Session,
+  Res
 } from '@nestjs/common';
 import { BusinessesService } from './businesses.service';
-import { CreateBusinessDto } from './dto/create-business.dto';
 import { UpdateBusinessDto } from './dto/update-business.dto';
+import { CreateBusinessDto } from './dto/create-business.dto';
+import { SessionData } from 'express-session';
+import { Response } from 'express';
 
-@Controller('businesses')
+@Controller('my-business')
 export class BusinessesController {
   constructor(private readonly businessesService: BusinessesService) {}
 
-  @Post('create')
-  async create(@Body() createBusinessDto: CreateBusinessDto) {
-    return await this.businessesService.create(createBusinessDto);
+  @Post()
+  async create(@Body() createBusinessDto: CreateBusinessDto, @Res() res: Response, @Session() session: SessionData) {
+    await this.businessesService.insert(session.user, createBusinessDto);
   }
 
-  @Get()
-  findAll() {
-    return this.businessesService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.businessesService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateBusinessDto: UpdateBusinessDto
+  @Patch()
+  async update(
+    @Body() updateBusinessDto: UpdateBusinessDto, 
+    @Res() res: Response,
+    @Session() session: SessionData
   ) {
-    return this.businessesService.update(+id, updateBusinessDto);
+    
+    await this.businessesService.update(session.user, updateBusinessDto);
+    return "Edited successfully."
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.businessesService.remove(+id);
-  }
 }

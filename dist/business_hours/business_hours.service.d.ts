@@ -1,9 +1,7 @@
-import { CreateBusinessHourDto } from './dto/create-business_hour.dto';
+import { DataSource } from 'typeorm';
 import { UpdateBusinessHourDto } from './dto/update-business_hour.dto';
 export declare class BusinessHoursService {
-  create(createBusinessHourDto: CreateBusinessHourDto): string;
-  findAll(): string;
-  findOne(id: number): string;
-  update(id: number, updateBusinessHourDto: UpdateBusinessHourDto): string;
-  remove(id: number): string;
+    private readonly dataSource;
+    constructor(dataSource: DataSource);
+    update(locationId: number, updateBusinessHourDto: UpdateBusinessHourDto): Promise<void>;
 }

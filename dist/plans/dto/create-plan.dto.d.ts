@@ -1,1 +1,2 @@
-export declare class CreatePlanDto {}
+export declare class CreatePlanDto {
+}

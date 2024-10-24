@@ -1,1 +1,2 @@
-export declare class SubscriptionsModule {}
+export declare class SubscriptionsModule {
+}

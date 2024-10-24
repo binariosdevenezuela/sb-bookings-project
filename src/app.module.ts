@@ -6,7 +6,6 @@ import { AppointmentsModule } from './appointments/appointments.module';
 import { BusinessPlanOverridesModule } from './business_plan_overrides/business_plan_overrides.module';
 import { SubscriptionsModule } from './subscriptions/subscriptions.module';
 import { PlansModule } from './plans/plans.module';
-import { BusinessBreaksModule } from './business_breaks/business_breaks.module';
 import { BusinessHolidaysModule } from './business_holidays/business_holidays.module';
 import { BusinessHoursModule } from './business_hours/business_hours.module';
 import { AppointmentsServicesModule } from './appointments_services/appointments_services.module';
@@ -16,11 +15,8 @@ import { ClientsModule } from './clients/clients.module';
 import { WorkersModule } from './workers/workers.module';
 import { UsersModule } from './users/users.module';
 import { BusinessLocationsModule } from './business_locations/business_locations.module';
-import { AuthController } from './auth/auth.controller';
 import { SignUpIntentModule } from './sign-up-intent/sign-up-intent.module';
-import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
-import { ResponseService } from './response/response.service';
 
 @Module({
   imports: [
@@ -33,6 +29,7 @@ import { ResponseService } from './response/response.service';
       database: 'bookings',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
+      logging: true
     }),
     TypeOrmModule.forFeature([SessionEntity]),
     BusinessesModule,
@@ -45,7 +42,6 @@ import { ResponseService } from './response/response.service';
     AppointmentsServicesModule,
     BusinessHoursModule,
     BusinessHolidaysModule,
-    BusinessBreaksModule,
     PlansModule,
     SubscriptionsModule,
     BusinessPlanOverridesModule,
@@ -53,6 +49,6 @@ import { ResponseService } from './response/response.service';
     SignUpIntentModule,
     AuthModule,
   ],
-  providers: [ResponseService],
+  providers: [],
 })
 export class AppModule {}
